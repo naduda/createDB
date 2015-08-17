@@ -63,4 +63,37 @@ public class Tools {
 			LOG.error("Can't create table user");
 		}
 	}
+	
+	public static void createTableTarifs(Statement statement) {
+		String query = String.format("CREATE TABLE tarifs ("
+				+ "dt timestamp NOT NULL,"
+				+ "idTarif smallint NOT NULL,"
+				+ "tarif1 double precision,"
+				+ "tarif2 double precision,"
+				+ "CONSTRAINT pk_tarifs PRIMARY KEY (idTarif, dt));");
+		try {
+			statement.execute(query);
+			LOG.info("Table tarifs created!");
+		} catch (SQLException e) {
+			LOG.error("Can't create table tarifs");
+			e.printStackTrace();
+		}
+	}
+	
+	public static void createTableData(Statement statement) {
+		String query = String.format("CREATE TABLE data ("
+				+ "dt timestamp NOT NULL,"
+				+ "idTarif smallint NOT NULL,"
+				+ "idUser integer NOT NULL,"
+				+ "value1 double precision,"
+				+ "value2 double precision,"
+				+ "CONSTRAINT pk_data PRIMARY KEY (idTarif, dt));");
+		try {
+			statement.execute(query);
+			LOG.info("Table data created!");
+		} catch (SQLException e) {
+			LOG.error("Can't create table data");
+			e.printStackTrace();
+		}
+	}
 }

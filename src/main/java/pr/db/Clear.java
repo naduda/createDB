@@ -9,19 +9,19 @@ import org.slf4j.Logger;
 
 public class Clear {
 	private static final Logger LOG = Tools.LOG;
+	private static String db = "127.0.0.1";
+	private static String port = "5432";
+	private static String user = "postgres";
+	private static String password = "12345678";
 	
-	public static void main(String[] args) {
-		LOG.info("-------- Clear ------------");
-
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			LOG.info("Where is your PostgreSQL JDBC Driver? Include in your library path!");
-			return;
-		}
-
+	public void clear() {
+		clear(db, port, user, password);
+	}
+	
+	public void clear(String db, String port, String user, String password) {
+		String connStr = String.format("jdbc:postgresql://%s:%s/", db, port);
 		try (Connection connection = 
-				DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/", "postgres", "12345678");
+				DriverManager.getConnection(connStr, user, password);
 				Statement statement = connection.createStatement();) {
 
 			LOG.info("Clear ready!");
