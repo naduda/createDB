@@ -50,12 +50,14 @@ public class Tools {
 	
 	public static void createTableUser(Statement statement) {
 		String query = String.format("CREATE TABLE users ("
-				+ "idUser integer NOT NULL,"
+				+ "idUser smallint NOT NULL DEFAULT 0,"
 				+ "userName character varying(20) NOT NULL,"
 				+ "login character varying(20) NOT NULL,"
 				+ "password character varying(50) NOT NULL,"
 				+ "email character varying(50) NOT NULL,"
-				+ "CONSTRAINT pk_users PRIMARY KEY (idUser));");
+				+ "lastTime timestamp NOT NULL,"
+				+ "CONSTRAINT pk_users PRIMARY KEY (idUser),"
+				+ "CONSTRAINT pk_login UNIQUE (login));");
 		try {
 			statement.execute(query);
 			LOG.info("Table user created!");
@@ -87,7 +89,7 @@ public class Tools {
 				+ "idUser integer NOT NULL,"
 				+ "value1 double precision,"
 				+ "value2 double precision,"
-				+ "CONSTRAINT pk_data PRIMARY KEY (idTarif, dt));");
+				+ "CONSTRAINT pk_data PRIMARY KEY (idUser, idTarif, dt));");
 		try {
 			statement.execute(query);
 			LOG.info("Table data created!");

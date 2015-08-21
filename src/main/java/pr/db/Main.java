@@ -37,6 +37,11 @@ public class Main {
 				LOG.error("ERROR!");
 				e.printStackTrace();
 			}
+		} else {
+			Create cr = new Create();
+			cr.create();
+//			Clear cl = new Clear();
+//			cl.clear();
 		}
 	}
 }
